@@ -7,7 +7,13 @@ class Dashboard extends Component {
 
   render() {
     return(
-      <div className='dashboard'>dashboard</div>
+      <div className='dashboard'>
+        <button>Ball</button>
+        <button>Strike</button>
+        <button>Foul</button>
+        <button>Hit</button>
+        <button>Run</button>
+      </div>
     );
   };
 };
