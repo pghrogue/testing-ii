@@ -89,14 +89,22 @@ class Dashboard extends Component {
     // Adds to score for appropriate inning
     // Changes player
     // Resets balls/strikes/fouls
-    const teamScore = this.state.team === 1 ? "team1score[{this.state.inning - 1}]" : "team2score[{this.state.inning - 1}]";
-    const inningScore = this.state.team === 1 ? this.state.team1score[this.state.inning -1] : this.state.team2score[this.state.inning -1];
+
+    // Get appropriate score array from state:
+    const scoreArr = this.state.team === 1 ? this.state.team1score : this.state.team2score;
+
+    // Adjust score for appropriate inning:
+    scoreArr[this.state.inning -1] = scoreArr[this.state.inning - 1] + 1;
+
+    // Get field name that needs changed:
+    const teamScore = this.state.team === 1 ? "team1score" : "team2score";
+
     this.setState({
       balls: 0,
       strikes: 0,
       fouls: 0,
       player: this.state.player + 1,
-      [teamScore]: inningScore + 1
+      [teamScore]: scoreArr
     });
   };
 

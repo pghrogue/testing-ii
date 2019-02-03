@@ -133,5 +133,29 @@ describe('The Dashboard component', () => {
       const scoreNode = component.getByTestId('t1_1');
       expect(scoreNode).toHaveTextContent(1);
     });
+
+    it('changes the player', () => {
+      const { getByText } = render(<Dashboard />);
+      const button = getByText('Run');
+
+      fireEvent.click(button);
+
+      const playerNode = getByText("Player2");
+      expect(playerNode).toBeDefined();
+    });
+
+    it('resets balls/strikes/fouls', () => {
+      const { getByText } = render(<Dashboard />);
+
+      // Add balls & strikes
+      fireEvent.click(getByText('Ball'));
+      fireEvent.click(getByText('Ball'));
+      fireEvent.click(getByText('Strike'));
+      expect(getByText("Balls: 2")).toBeDefined();
+
+      fireEvent.click(getByText('Run'));
+      expect(getByText("Balls: 0")).toBeDefined();
+      expect(getByText("Strikes: 0")).toBeDefined();
+    });
   });
 });
