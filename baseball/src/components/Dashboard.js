@@ -75,6 +75,15 @@ class Dashboard extends Component {
     }
   };
 
+  registerHit = (event) => {
+    // Reset balls/strikes/fouls & switch player
+    this.setState({
+      balls: 0,
+      strikes: 0,
+      fouls: 0,
+      player: this.state.player + 1
+    });
+  };
 
   render() {
     return(
@@ -84,7 +93,7 @@ class Dashboard extends Component {
           <button onClick={this.registerBall}>Ball</button>
           <button onClick={this.registerStrike}>Strike</button>
           <button onClick={this.registerFoul}>Foul</button>
-          <button>Hit</button>
+          <button onClick={this.registerHit}>Hit</button>
           <button>Run</button>
         </div>
       </div>
