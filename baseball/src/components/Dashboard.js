@@ -11,8 +11,55 @@ class Dashboard extends Component {
       balls: 0,
       strikes: 0,
       outs: 0,
-      player: 1
+      player: 1,
+      team: 1
     };
+  };
+
+  registerBall = (event) => {
+    event.preventDefault();
+    if( this.state.balls === 3 ) {
+      // Batter walks if he reaches 4 balls, reset back to 0.
+      this.setState({
+        balls: 0
+      });
+    } else {
+      const balls = this.state.balls + 1;
+      this.setState({
+        balls: balls
+      });
+    }
+  };
+
+  registerStrike = (event) => {
+    event.preventDefault();
+    if( this.state.strikes === 2 ){
+      // 3rd strike = "Yerr Out!!";
+      const newOuts = this.state.outs + 1;
+      if( newOuts === 3 ){
+        // 3 outs = switch teams - reset
+        this.setState({
+          inning: this.state.team === 2 ? this.state.inning + 1 : this.state.inning,
+          balls: 0,
+          strikes: 0,
+          outs: 0,
+          player: this.state.player + 1,
+          team: this.state.team === 1 ? 2 : 1
+        });
+      } else {
+        this.setState({ 
+          balls: 0,
+          strikes: 0, 
+          outs: newOuts,
+          player: this.state.player + 1
+        });
+      } // end 3 outs
+    } // 3 strikes
+    else {
+      this.setState({
+        strikes: this.state.strikes + 1
+      });
+    }
   };
 
   render() {
@@ -20,8 +67,8 @@ class Dashboard extends Component {
       <div className='game'>
         <Display {...this.state} />
         <div className='dashboard'>
-          <button>Ball</button>
-          <button>Strike</button>
+          <button onClick={this.registerBall}>Ball</button>
+          <button onClick={this.registerStrike}>Strike</button>
           <button>Foul</button>
           <button>Hit</button>
           <button>Run</button>

@@ -71,7 +71,9 @@ button {
   justify-content: space-evenly;
   margin: 0px 5px;
 }
-
+.selected {
+  background-color: yellow;
+}
 ul {
   display: flex;
   flex-direction: row;

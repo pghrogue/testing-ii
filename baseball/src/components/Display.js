@@ -10,6 +10,8 @@ class Display extends Component {
     let innDisplay = this.props.inning === 1 ? "st" : (this.props.inning === 2 ? "nd" : (this.props.inning === 3 ? "rd" : "th"));
     innDisplay = `${this.props.inning}${innDisplay} Inning`;
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    let team1 = this.props.team === 1 ? "team selected" : "team";
+    let team2 = this.props.team === 2 ? "team selected" : "team";
 
     return(
       <div className='display'>
@@ -17,7 +19,7 @@ class Display extends Component {
           <div className='player'>Player{this.props.player}</div><div className='inning'>{innDisplay}</div>
         </div>
         <div className='scores'>
-          <div className='team' data-testid="team1score">Team1: 
+          <div className={team1} data-testid="team1score">Team1: 
             <ul>
               { this.props.team1score.map( (score, indx) =>
                 (<li key={indx} data-testid={`t1_${indx+1}`}>{score}</li>)
@@ -25,7 +27,7 @@ class Display extends Component {
               <li>:{this.props.team1score.reduce(reducer)}</li>
             </ul>
           </div>
-          <div className='team' data-testid="team2score">Team2: 
+          <div className={team2} data-testid="team2score">Team2: 
             <ul>
               { this.props.team2score.map( (score, indx) =>
                 (<li key={indx} data-testid={`t2_${indx}`}>{score}</li>)

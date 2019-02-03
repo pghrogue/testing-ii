@@ -14,7 +14,8 @@ describe('The Display component', () => {
     balls: 2,
     strikes: 1,
     outs: 0,
-    player: 1
+    player: 1,
+    team: 1
   };
 
   // Act
