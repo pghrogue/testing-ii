@@ -98,4 +98,30 @@ describe('The Dashboard component', () => {
       expect(getByText('Strikes: 2')).toBeDefined();
     });
   });
+
+  describe('The Hit button', () => {
+    it('resets balls/strikes/fouls to 0', () => {
+      const { getByText } = render(<Dashboard />);
+
+      // Give it a strike & 2 balls:
+      fireEvent.click(getByText('Strike'));
+      fireEvent.click(getByText('Ball'));
+      fireEvent.click(getByText('Ball'));
+
+      // Fire a hit
+      fireEvent.click(getByText('Hit'));
+
+      // Balls & Strike displays should be reset, go to next player
+      const balls = getByText('Balls: 0');
+      expect(balls).toBeDefined();
+
+      const strikes = getByText('Strikes: 0');
+      expect(strikes).toBeDefined();
+
+      const player = getByText('Player2');
+      expect(player).toBeDefined();
+    });
+  });
+
+  describe('The Run button', () => {});
 });
