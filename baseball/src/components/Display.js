@@ -34,9 +34,9 @@ class Display extends Component {
             </ul>          
           </div>
         </div>
-        <div className='balls'>balls</div>
-        <div className='strikes'>strikes</div>
-        <div className='outs'>outs</div>
+        <div className='balls'>Balls: {this.props.balls}</div>
+        <div className='strikes'>Strikes: {this.props.strikes}</div>
+        <div className='outs'>Outs: {this.props.outs}</div>
       </div>
     );
   };

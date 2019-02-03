@@ -21,7 +21,7 @@ describe('The Display component', () => {
   const { getByText } = render(<Display {...props} />);
 
   it('renders the display', () => {
-    render(<Display />);
+    render(<Display {...props}/>);
   });
 
   describe('The header', () => {
@@ -38,6 +38,7 @@ describe('The Display component', () => {
       const { getByText } = render(<Display {...props} />);
 
       const inningNode = getByText('3rd Inning');
+      expect(inningNode).toBeDefined();
     });
   });
   
@@ -78,4 +79,26 @@ describe('The Display component', () => {
 
   });
 
+  describe('The current batter', () => {
+    it('shows the number of balls', () => {
+      const { getByText } = render(<Display {...props} />);
+
+      const ballsNode = getByText(`Balls: ${props.balls}`);
+      expect(ballsNode).toBeDefined();
+    });
+
+    it('shows the number of strikes', () => {
+      const { getByText } = render(<Display {...props} />);
+
+      const strikesNode = getByText(`Strikes: ${props.strikes}`);
+      expect(strikesNode).toBeDefined();
+    });
+
+    it('shows the number of outs', () => {
+      const { getByText } = render(<Display {...props} />);
+
+      const outsNode = getByText(`Outs: ${props.outs}`);
+      expect(outsNode).toBeDefined();
+    });
+  });
 });
