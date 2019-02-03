@@ -22,7 +22,7 @@
   background-color: darkgray;
   color: black;
   border: 1px solid darkslategray;
-  height: 280px;
+  height: 340px;
   width: 400px;
   display: flex;
   flex-direction: column;
@@ -67,7 +67,6 @@ button {
 .team {
   display: flex;
   flex-direction: row;
-  border: 1px solid black;
   align-items: center;
   justify-content: space-evenly;
   margin: 0px 5px;
@@ -76,11 +75,14 @@ button {
 ul {
   display: flex;
   flex-direction: row;
-  border: 1px solid red;
   width: 70%;
 }
 
 li {
   list-style: none;
-
+  border: 1px solid black;
+  width: 50px;
+}
+li:last-child {
+  border: none;
 }

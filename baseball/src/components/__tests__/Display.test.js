@@ -9,10 +9,8 @@ describe('The Display component', () => {
   // Arrange
   const props = {
     inning: 3,
-    runs: {
-      team1: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-      team2: [9, 8, 7, 6, 5, 4, 3, 2, 1]
-    },
+    team1score: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    team2score: [9, 8, 7, 6, 5, 4, 3, 2, 1],
     balls: 2,
     strikes: 1,
     outs: 0,
@@ -44,19 +42,40 @@ describe('The Display component', () => {
   });
   
   describe('The scorecard', () => {
-    it('renders the score for team1', () => {
+    it('renders the scorecard for team1', () => {
       const { getByTestId } = render(<Display {...props} />);
 
       const scoreNode = getByTestId('team1score');
-      expect(scoreNode).toHaveTextContent(props.runs.team1);
+      let t1score = props.team1score.join('');
+      let reduced = props.team1score.reduce( (acc,val) => acc + val, 0);
+      t1score += ":"+reduced;
+      expect(scoreNode).toHaveTextContent(t1score);
     });
 
-    it('renders the score for team2', () => {
+    it('renders the score for team1 3rd inning', () => {
+      const { getByTestId } = render(<Display {...props} />);
+
+      const scoreNode = getByTestId('t1_3');
+      expect(scoreNode).toHaveTextContent(props.team1score[2]);
+    });
+
+    it('renders the scorecard for team2', () => {
       const { getByTestId } = render(<Display {...props} />);
 
       const scoreNode = getByTestId('team2score');
-      expect(scoreNode).toHaveTextContent(props.runs.team2);
+      let t2score = props.team2score.join('');
+      let reduced = props.team2score.reduce( (acc,val) => acc + val, 0);
+      t2score += ":"+reduced;
+      expect(scoreNode).toHaveTextContent(t2score);
     });
+
+    it('renders the score for team1 8th inning', () => {
+      const { getByTestId } = render(<Display {...props} />);
+
+      const scoreNode = getByTestId('t1_8');
+      expect(scoreNode).toHaveTextContent(props.team1score[7]);
+    });
+
   });
 
 });
