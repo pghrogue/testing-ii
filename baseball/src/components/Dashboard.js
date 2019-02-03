@@ -62,6 +62,20 @@ class Dashboard extends Component {
     }
   };
 
+  registerFoul = (event) => {
+    // Fouls cause strikes if there are less than 2 strikes
+    if( this.state.strikes < 2 ){
+      this.setState({
+        fouls: this.state.fouls + 1,
+        strikes: this.state.strikes + 1
+      });
+    } else {
+      // No effect
+      this.setState({ fouls: this.state.fouls + 1 });
+    }
+  };
+
+
   render() {
     return(
       <div className='game'>
@@ -69,7 +83,7 @@ class Dashboard extends Component {
         <div className='dashboard'>
           <button onClick={this.registerBall}>Ball</button>
           <button onClick={this.registerStrike}>Strike</button>
-          <button>Foul</button>
+          <button onClick={this.registerFoul}>Foul</button>
           <button>Hit</button>
           <button>Run</button>
         </div>

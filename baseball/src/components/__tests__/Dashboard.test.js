@@ -58,5 +58,44 @@ describe('The Dashboard component', () => {
       const strikesDisplay = getByText('Strikes: 1');
       expect(strikesDisplay).toBeDefined();
     });
+
+    it('causes an "Out" after 3 strikes', () => {
+      const { getByText } = render(<Dashboard />);
+      const button = getByText('Strike');
+
+      fireEvent.click(button);
+      expect(getByText('Strikes: 1')).toBeDefined();
+
+      fireEvent.click(button);
+      expect(getByText('Strikes: 2')).toBeDefined();
+
+      fireEvent.click(button);
+      expect(getByText('Strikes: 0')).toBeDefined();
+      expect(getByText('Outs: 1')).toBeDefined();
+    });
+  });
+
+  describe('The foul button', () => {
+    it('causes a strike for the first two fouls if no strikes', () => {
+      const { getByText } = render(<Dashboard />);
+      const button = getByText('Foul');
+
+      fireEvent.click(button);
+      expect(getByText('Strikes: 1')).toBeDefined();
+
+      fireEvent.click(button);
+      expect(getByText('Strikes: 2')).toBeDefined();
+    });
+
+    it('does not add strikes when there are already 2', () => {
+      const { getByText } = render(<Dashboard />);
+      const button = getByText('Foul');
+
+      fireEvent.click(getByText('Strike'));
+      fireEvent.click(getByText('Strike'));
+      fireEvent.click(button);
+
+      expect(getByText('Strikes: 2')).toBeDefined();
+    });
   });
 });
