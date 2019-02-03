@@ -85,6 +85,21 @@ class Dashboard extends Component {
     });
   };
 
+  registerRun = (event) => {
+    // Adds to score for appropriate inning
+    // Changes player
+    // Resets balls/strikes/fouls
+    const teamScore = this.state.team === 1 ? "team1score[{this.state.inning - 1}]" : "team2score[{this.state.inning - 1}]";
+    const inningScore = this.state.team === 1 ? this.state.team1score[this.state.inning -1] : this.state.team2score[this.state.inning -1];
+    this.setState({
+      balls: 0,
+      strikes: 0,
+      fouls: 0,
+      player: this.state.player + 1,
+      [teamScore]: inningScore + 1
+    });
+  };
+
   render() {
     return(
       <div className='game'>
@@ -94,7 +109,7 @@ class Dashboard extends Component {
           <button onClick={this.registerStrike}>Strike</button>
           <button onClick={this.registerFoul}>Foul</button>
           <button onClick={this.registerHit}>Hit</button>
-          <button>Run</button>
+          <button onClick={this.registerRun}>Run</button>
         </div>
       </div>
     );

@@ -123,5 +123,15 @@ describe('The Dashboard component', () => {
     });
   });
 
-  describe('The Run button', () => {});
+  describe('The Run button', () => {
+    it('adds to the score for team1 inning1', () => {
+      const component = render(<Dashboard />);
+      const button = component.getByText('Run');
+
+      fireEvent.click(button);
+
+      const scoreNode = component.getByTestId('t1_1');
+      expect(scoreNode).toHaveTextContent(1);
+    });
+  });
 });
