@@ -1,3 +1,4 @@
+```bash
 $ react-scripts test --verbose
  PASS  src/components/__tests__/Display.test.js
   The Display component
@@ -42,3 +43,4 @@ Tests:       22 passed, 22 total
 Snapshots:   0 total
 Time:        5.931s
 Ran all test suites.
+```
